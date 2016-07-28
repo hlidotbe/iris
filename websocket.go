@@ -788,6 +788,10 @@ var Ws = (function () {
         }
         return true;
     };
+    Ws.prototype.isObject(obj) {
+        if (obj === null) { return false;}
+        return (typeof obj === 'object');
+    };
     //
     // messages
     Ws.prototype._msg = function (event, websocketMessageType, dataMessage) {
@@ -808,7 +812,7 @@ var Ws = (function () {
             t = websocketStringMessageType;
             m = data.toString();
         }
-        else if (this.isJSON(data)) {
+        else if (this.isObject(data)) {
             //propably json-object
             t = websocketJSONMessageType;
             m = JSON.stringify(data);
